@@ -1,0 +1,34 @@
+### Recuperar todas las películas
+GET http://localhost:1234/movies
+
+### Película por ID
+GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+### Todas las películas por género
+GET http://localhost:1234/movies?genre=drama
+
+### Crear una película con POST
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+{
+  "title": "The Alejandro",
+  "year": 1994,
+  "director": "Frank Darabont",
+  "duration": 142,
+  "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
+  "genre": [
+    "Drama"
+  ]
+}
+
+### Actualizar película
+PATCH http://localhost:1234/movies/3b32a9df-eb9e-419a-9588-e64ba06a95b0
+Content-Type: application/json
+
+{
+  "year": 1925
+}
+
+### Eliminar movie
+DELETE http://localhost:1234/movies/3b32a9df-eb9e-419a-9588-e64ba06a95b0
