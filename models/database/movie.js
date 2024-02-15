@@ -35,14 +35,41 @@ export class MovieModel {
   }
 
   static async create ({ input }) {
+    const {
+      title,
+      year,
+      director,
+      duration,
+      poster,
+      rate
+    } = input
 
+    const uuidResult = await client.query('SELECT gen_random_uuid() uuid')
+    const [{ uuid }] = uuidResult.rows
+
+    try {
+      await client.query('INSERT INTO movies (id, title, year, director, duration, poster, rate) VALUES ($1, $2, $3, $4, $5, $6, $7)', [uuid, title, year, director, duration, poster, rate])
+    } catch (e) {
+      throw new Error('Error to send information')
+    }
+
+    const movies = await client.query('SELECT id, title, year, director, duration, poster, rate FROM movies WHERE id = $1', [uuid])
+
+    return movies.rows
   }
 
   static async delete ({ id }) {
-
+    await client.query('DELETE FROM movies WHERE id = $1', [id])
   }
 
   static async update ({ id, input }) {
-
+    const fields = Object.keys(input)
+    if (fields.length === 0) {
+      return 'No fields to update'
+    }
+    const set = fields.map((field, index) => `${field} = $${index + 1}`).join(', ')
+    const values = fields.map(field => input[field])
+    client.query(`UPDATE movies SET ${set} WHERE id = $${fields.length + 1}`, [...values, id])
+    return 'Movie updated'
   }
 }

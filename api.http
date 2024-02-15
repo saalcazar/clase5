@@ -2,19 +2,18 @@
 GET http://localhost:1234/movies
 
 ### Película por ID
-GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
-
+GET http://localhost:1234/movies/6bef5c87-4ee8-4361-8453-5449c81e6fe7
 ### Todas las películas por género
-GET http://localhost:1234/movies?genre=drama
+GET http://localhost:1234/movies?genre=sci-fi
 
 ### Crear una película con POST
 POST http://localhost:1234/movies
 Content-Type: application/json
 
 {
-  "title": "The Alejandro",
+  "title": "The Sandman",
   "year": 1994,
-  "director": "Frank Darabont",
+  "director": "Samuel Alcazar",
   "duration": 142,
   "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
   "genre": [
@@ -23,12 +22,13 @@ Content-Type: application/json
 }
 
 ### Actualizar película
-PATCH http://localhost:1234/movies/3b32a9df-eb9e-419a-9588-e64ba06a95b0
+PATCH http://localhost:1234/movies/6bef5c87-4ee8-4361-8453-5449c81e6fe7
 Content-Type: application/json
 
 {
-  "year": 1925
+  "title": "Hola mundo",
+  "year": 2019
 }
 
 ### Eliminar movie
-DELETE http://localhost:1234/movies/3b32a9df-eb9e-419a-9588-e64ba06a95b0
+DELETE http://localhost:1234/movies/de99d9f1-458b-46e5-b728-32a0bb558676
